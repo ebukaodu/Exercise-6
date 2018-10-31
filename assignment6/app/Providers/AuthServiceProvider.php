@@ -24,6 +24,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::define('manipulate-item', function($user, $item){
+            return $user->id == $item->user_id;
+        });
 
         //
     }

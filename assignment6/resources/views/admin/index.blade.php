@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.main')
 @section('content')
     @if(Session::has('info'))
         <div class="row">
@@ -9,14 +9,16 @@
     @endif
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('admin.create') }}" class="btn btn-success">New Post</a>
+            <a href="{{ route('admin.create') }}" class="btn btn-success">New Item</a>
         </div>
     </div>
     <hr>
     @foreach($items as $item)
         <div class="row">
             <div class="col-md-12">
-                <p><strong>{{ $item['name'] }}</strong> <a href="{{ route('admin.edit', ['id' => array_search($item, $items)]) }}">Edit</a></p>
+                <p><strong>{{ $item->name }}</strong>
+                    <a href="{{ route('admin.edit', ['id' => $item->id]) }}">Edit</a> |
+                    <a href="{{ route('admin.delete', ['id' => $item->id]) }}">Delete</a></p>
             </div>
         </div>
     @endforeach
